@@ -10,7 +10,9 @@ To run or compile into an app, first install (with pip):
 Then, run:
 
 >> python main.py
+
 >or
+
 >> python3 main.py
 
 You can edit the source code of the .json files (most importantly app_name and max_rating in appinfo.json) to your liking to modify the settings before making the python program into a macOS application.
@@ -56,7 +58,7 @@ Currently, the program only supports the input of the diary itself and exactly t
 
 - more settings:
 
-I'd like to add some settings within the app that allow the user to change the max_rating, the app_name, and possibly the number of aspects. 
+I'd like to add some settings within the app that allow the user to change the max_rating, the app_name, and possibly the number of aspects.
 
 - better look:
 
