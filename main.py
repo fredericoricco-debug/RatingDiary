@@ -1,7 +1,7 @@
 import PySimpleGUI as sg                  #Used for all UI elements.
 import json                               #Used for storage.
 from datetime import datetime             #Used for sorting diaries.
-from modules import *
+from functions import *
 
 #Fonts
 DISPLAY_FONT = 'Helvetica 15' #Diary font.
@@ -25,8 +25,8 @@ sg.theme('DarkAmber')
 
 #Creates menu bar
 menu_def = [['File', ['Save']],
-['Settings', ['Reset Aspects', 'Reset All Settings', 'License']],
-['About', ['Licence', 'Contact']]
+['Settings', ['Reset Aspects', 'Reset All Settings']],
+['About', ['Licence']]
 ]
 
 #Create First Column
@@ -39,8 +39,7 @@ left_col = [[sg.Text("Welcome to %s!" % (app_name), font = LINE_FONT),
             "-IN-", size = (150, 2)), sg.Submit(key = "-SUB-")],[sg.Button("Clear Input", key =
             "-CLR-"),sg.Button("Submit Diary", key = "-SUB2-"),
             sg.Button("Delete Diary", key = "-DEL-"), sg.Text("", size =
-            (100,1)), sg.Button("Show Graphs", key =
-            "-GRA-")],[sg.Multiline(size = (105, 30), key =
+            (100,1))],[sg.Multiline(size = (105, 30), key =
             "-FULL-", default_text = linebyline, font = DISPLAY_FONT)]]
 
 #Create Second Column
@@ -61,7 +60,7 @@ def sub_2():
     lst_diary.append(rate_aspects())
     data = get_json()
     diary_dict = data["diary_dict"]                           #Assigns diary_list to local variable.
-    with open('appinfo.json', 'w+') as json_file:             #Opens file w/ write, clearing file.
+    with open("/Users/admin/Documents/Projects/RatingDiary/appinfo.json", 'w+') as json_file:             #Opens file w/ write, clearing file.
         now = datetime.now()                                  #Fetches current time.
         diary_dict[title()] = '\n'.join(map(str, lst_diary))  #Adds new entry with timestamp to internal dict.
         data["diary_dict"] = diary_dict                       #Changes one value in internal list.
@@ -89,7 +88,7 @@ if run_count > -1:
             window['-IN-'].update('')                                 #Updates input field with blank text.
         if events == '-DISPLAY-':
             try:
-                with open("appinfo.json", "r") as json_file:          #Opens json file w/ read.
+                with open("/Users/admin/Documents/Projects/RatingDiary/appinfo.json", "r") as json_file:          #Opens json file w/ read.
                     data = json.load(json_file)                       #Creates internal dictionary with json data.
                     diary_dict = data["diary_dict"]                   #Extracts diary dict from intermal list.
                 ind = window[events].get()                            #Gets index for selected listbox element.
@@ -99,7 +98,7 @@ if run_count > -1:
         if events == '-DEL-':
             data = get_json()
             diary_dict = data["diary_dict"]
-            with open('appinfo.json', 'w+') as json_file:             #Opens file w/ write, clearing file.
+            with open("/Users/admin/Documents/Projects/RatingDiary/appinfo.json", 'w+') as json_file:             #Opens file w/ write, clearing file.
                 diary_dict.pop(str(ind[0]), None)                     #Removes listbox index from list.
                 data["diary_dict"] = diary_dict                       #Changes one value in internal list.
                 json.dump(data, json_file)                            #Updates json_file.
@@ -114,5 +113,3 @@ if run_count > -1:
                 set_aspects()
         if events == 'Licence':
             license()
-        if events == '-GRA-':
-            show_total_graph()

@@ -1,14 +1,10 @@
 from setuptools import setup
 
-print("""You can create a distribution version with py2app.
-      \nThe current version at the time of writting this doesn't work very well.
-      \nTo install this app, just place the py2app folder in your project folder and run:
-      \npython3 setup.py py2app
-      \nGood Luck!""")
+print("If you only get this line, read the readme.md file on how to use RatingDiary!")
 
 DATA_FILES = ['appinfo.json', 'generalinfo.json']
 OPTIONS = {
-    'iconfile':'icon.icns',
+    'iconfile':'icon/icon.icns',
 }
 
 setup(name="RatingDiary",
